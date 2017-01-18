@@ -16,4 +16,15 @@ docker service create --network=monitoring --mode global --name cadvisor \
   -storage_driver=elasticsearch \
   -storage_driver_es_host="http://elasticsearch:9200"
 
-docker service create --network=monitoring --replicas=1 --name=logstash-gelf logstash-gelf
+#docker service create --network=monitoring --replicas=1 --name=logstash-gelf logstash-gelf
+docker service create --network=monitoring --replicas=1 --name=logstash-syslog logstash-syslog
+
+docker service create --network=monitoring --name logspout \
+    --mode global \
+    --mount "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock" \
+    -e SYSLOG_FORMAT=rfc3164 \
+    gliderlabs/logspout syslog://logstash-syslog:5000
+
+## Test: docker run --rm --log-driver=gelf --log-opt gelf-address=udp://$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' logstash):12201 --log-opt tag="test" alpine /bin/sh -c "while true; do echo My Message \$RANDOM; sleep 1; done;"
+docker service create --network=monitoring --replicas=1 alpine /bin/sh -c "while true; do echo My Message \$RANDOM; sleep 1; done;"
+
