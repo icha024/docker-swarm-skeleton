@@ -1,4 +1,4 @@
-# https://blog.codeship.com/monitoring-docker-containers-with-elasticsearch-and-cadvisor/
+# Ref: https://blog.codeship.com/monitoring-docker-containers-with-elasticsearch-and-cadvisor/
 docker network create monitoring -d overlay
 
 docker service create -p 9200:9200 --network=monitoring \
@@ -17,7 +17,7 @@ docker service create --network=monitoring --mode global --name cadvisor \
   -storage_driver_es_host="http://elasticsearch:9200"
 
 #docker service create --network=monitoring --replicas=1 --name=logstash-gelf logstash-gelf
-docker service create --network=monitoring --replicas=1 --name=logstash-syslog logstash-syslog
+docker service create --network=monitoring --mode global --name=logstash-syslog logstash-syslog
 
 docker service create --network=monitoring --name logspout \
     --mode global \
