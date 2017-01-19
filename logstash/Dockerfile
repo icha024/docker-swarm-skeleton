@@ -1,4 +1,4 @@
-FROM logstash:latest
+FROM logstash:5
 
 ADD logstash-syslog.conf /config/logstash.conf
 EXPOSE 5000
