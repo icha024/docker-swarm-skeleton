@@ -9,14 +9,14 @@
 1. Start your master swarm node (host IP must be reachable from other other nodes, ie. Use network IP instead of localhost):
   `docker swarm init --advertise-host=<host IP>`
 
-2. Run the script to setup all the good stuff:
+2. Clone this repo then run the setup script:
   `sh populateSwarm.sh`
 
 3. (Optional) Start other Swarm workers/managers
 
 4. Admire the consoles:
-- Kibana (ELK): `http://<your IP>:5601`
-- Portainer: `http://<your IP>:9000`
+  - Kibana (ELK): `http://<your IP>:5601`
+  - Portainer: `http://<your IP>:9000`
 
 ## Tweak for multiple hosts
 The ElasticSearch and Portainer uses a temporary local volume by default.
