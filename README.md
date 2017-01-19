@@ -12,7 +12,7 @@
 2. Clone this repo then run the setup script:
   `sh populateSwarm.sh`
 
-3. (Optional) Start other Swarm workers/managers
+3. (Optional) Start other Swarm workers/managers to form the cluster. ie. copy/paste the command + token from master node and run it on other nodes.
 
 4. Admire the consoles:
   - Kibana (ELK): `http://<your IP>:5601`
@@ -34,4 +34,5 @@ It should show up in Kibana after a minute, check: `Dashboard -> Open -> MetricB
 `docker service rm load-dashboards`
 
 ## TODO:
+- Push images with custom config to DockerHub
 - Authentications
