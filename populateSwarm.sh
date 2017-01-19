@@ -5,7 +5,7 @@ docker service create -p 9200:9200 --network=monitoring \
   --mount type=volume,target=/usr/share/elasticsearch/data \
   --name elasticsearch elasticsearch:5
 
-docker service create --network=monitoring --name kibana -e ELASTICSEARCH_URL="http://elasticsearch:9200" -p 5601:5601 kibana:5
+docker service create --network=monitoring --name kibana -e ELASTICSEARCH_URL="http://elasticsearch:9200" -p 5601:5601 -e LOGSPOUT=ignore kibana:5
 
 docker service create --network=monitoring --mode global --name=logstash-syslog logstash-syslog
 
